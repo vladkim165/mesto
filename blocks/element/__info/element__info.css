@@ -1,0 +1,9 @@
+.element__info {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 246px;
+  margin: 25px auto 0 auto;
+  align-items: baseline;
+}

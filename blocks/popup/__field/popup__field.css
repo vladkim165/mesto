@@ -1,0 +1,26 @@
+.popup__field {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  line-height: 17px;
+  height: 27px;
+  width: 100%;
+  font-family: inherit;
+  margin-bottom: 30px;
+  font-family: inherit;
+}
+
+.popup__field:last-of-type {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__field {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .popup__field:last-of-type {
+    margin-bottom: 45px;
+  }
+}

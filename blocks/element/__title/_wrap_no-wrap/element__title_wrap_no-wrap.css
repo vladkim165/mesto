@@ -1,0 +1,5 @@
+.element__title_wrap_no-wrap {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

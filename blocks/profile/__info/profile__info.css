@@ -1,0 +1,28 @@
+.profile__info {
+  display: grid;
+  grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content);
+  grid-template-areas: 
+  'title edit-button'
+  'subtitle subtitle';
+  row-gap: 16px;
+  column-gap: 18px;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 650px) {
+  .profile__info {
+    row-gap: 14px;
+    column-gap: 15px;
+    margin-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .profile__info {
+    row-gap: 14px;
+    column-gap: 10px;
+    margin-bottom: 36px;
+    justify-content: center;
+  }
+}
