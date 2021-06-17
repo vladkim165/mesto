@@ -7,13 +7,13 @@ const userName = document.querySelector('.profile__title');
 const userBio = document.querySelector('.profile__subtitle');
 
 const openPopup = function() {
-  popupElement.classList.add('popup_visibility_opened');
+  popupElement.classList.add('popup_opened');
   popupNameElement.value = userName.textContent;
   popupBioElement.value = userBio.textContent;
 }
 
 const closePopup = function() {
-  popupElement.classList.remove('popup_visibility_opened');
+  popupElement.classList.remove('popup_opened');
 }
 
 const closePopupByClickOnOverlay = function(event) {
