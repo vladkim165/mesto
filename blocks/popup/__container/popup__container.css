@@ -1,5 +1,5 @@
 .popup__container {
-  width: 100;
+  width: 100%;
   max-width: calc(430px - 72px);
   position: relative;
   background: #FFFFFF;
