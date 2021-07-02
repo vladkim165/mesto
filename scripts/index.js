@@ -6,17 +6,17 @@ const formBioElement = popupElement.querySelector('.form__field_input_bio');
 const userName = document.querySelector('.profile__title');
 const userBio = document.querySelector('.profile__subtitle');
 
-const openPopup = function() {
+const openPopup = function () {
   popupElement.classList.add('popup_opened');
   formNameElement.value = userName.textContent;
   formBioElement.value = userBio.textContent;
 }
 
-const closePopup = function() {
+const closePopup = function () {
   popupElement.classList.remove('popup_opened');
 }
 
-const closePopupByClickOnOverlay = function(event) {
+const closePopupByClickOnOverlay = function (event) {
   if (event.target !== event.currentTarget) {
     return;
   }
@@ -46,3 +46,112 @@ popupElement.addEventListener('submit', editProfileInfo);
 
 
 //добавлены слушатели событий на кнопки
+
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+function renderCard(element) {
+  const cardList = document.querySelector('.elements__list');
+  const cardTemplateContent = document.querySelector('.card-template').content;
+  const cardElement = cardTemplateContent.cloneNode(true);
+
+  cardElement.querySelector('.element__image').src = element.link;
+  cardElement.querySelector('.element__image').alt = element.name;
+  cardElement.querySelector('.element__title').textContent = element.name;
+
+  setEventListeners(cardElement);
+
+  cardList.prepend(cardElement);
+}
+
+function renderCards(initialCards) {
+  initialCards.forEach(renderCard);
+}
+
+renderCards(initialCards);
+
+// Добавили функцию рендера карточек, отрендерили объекты из массива
+
+const addFormButton = document.querySelector('.profile__add-button');
+const addFormPopup = document.querySelector('.popup_add-form');
+const closeAddFormButton = addFormPopup.querySelector('.form__close-button_s');
+const formPlaceNameElement = addFormPopup.querySelector('.form__field_input_place-name');
+const formLinkElement = addFormPopup.querySelector('.form__field_input_link');
+const cardName = document.querySelector('.element__title');
+const cardImage = document.querySelector('.element__image');
+
+const openAddForm = function () {
+  addFormPopup.classList.add('popup_opened');
+}
+
+const closeAddForm = function () {
+  addFormPopup.classList.remove('popup_opened');
+}
+
+const closeAddFormByClickOnOverlay = function (event) {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+
+  closeAddForm()
+}
+
+addFormButton.addEventListener('click', openAddForm);
+closeAddFormButton.addEventListener('click', closeAddForm);
+addFormPopup.addEventListener('click', closeAddFormByClickOnOverlay);
+
+
+const addNewCard = function (event) {
+  event.preventDefault();
+  const cardList = document.querySelector('.elements__list');
+  const cardTemplateContent = document.querySelector('.card-template').content;
+  const cardElement = cardTemplateContent.cloneNode(true);
+
+  cardElement.querySelector('.element__image').src = formLinkElement.value
+  cardElement.querySelector('.element__image').alt = formPlaceNameElement.value
+  cardElement.querySelector('.element__title').textContent = formPlaceNameElement.value
+
+  setEventListeners(cardElement);
+
+  cardList.prepend(cardElement);
+
+  formLinkElement.value = '';
+  formPlaceNameElement.value = '';
+  closeAddForm();
+}
+
+addFormPopup.addEventListener('submit', addNewCard);
+
+
+function setEventListeners(cardElement) {
+  cardElement.querySelector('.element__like-button').addEventListener('click', handleDelete)
+}
+
+function handleDelete() {
+  console.log('delete');
+}
