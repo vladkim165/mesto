@@ -126,6 +126,7 @@ closeAddFormButton.addEventListener('click', closeAddForm);
 addFormPopup.addEventListener('click', closeAddFormByClickOnOverlay);
 
 
+//функция добавления новой карточки в дом дерево
 const addNewCard = function (event) {
   event.preventDefault();
   const cardList = document.querySelector('.elements__list');
@@ -148,10 +149,12 @@ const addNewCard = function (event) {
 addFormPopup.addEventListener('submit', addNewCard);
 
 
+//обьявим функцию обработчика событий при клике на кнопки карточек
 function setEventListeners(cardElement) {
-  cardElement.querySelector('.element__like-button').addEventListener('click', handleDelete)
+  cardElement.querySelector('.element__like-button').addEventListener('click', handleLikeCard)
 }
-
-function handleDelete() {
-  console.log('delete');
+//объявим функции-действия при срабатывании клика на определённую кнопку
+function handleLikeCard(event) {
+  event.target.closest('.element').querySelector('.element__like-button').classList.toggle('element__like-button_active')
+  console.log('like');
 }
