@@ -67,3 +67,16 @@ const initialCards = [
   }
 ]; 
 
+initialCards.forEach(function (element) {
+  const listElements = document.querySelector('.elements__list');
+  const cardTemplate = document.querySelector('.card-template').content;
+  const itemsElement = cardTemplate.cloneNode(true);
+
+
+  itemsElement.querySelector('.element__image').src = element.link;
+  itemsElement.querySelector('.element__image').alt = element.name;
+  itemsElement.querySelector('.element__title').textContent = element.name;
+
+
+  listElements.appendChild(itemsElement);
+});
