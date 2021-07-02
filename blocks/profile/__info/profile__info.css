@@ -20,9 +20,7 @@
 
 @media screen and (max-width: 350px) {
   .profile__info {
-    row-gap: 14px;
     column-gap: 10px;
-    margin-bottom: 36px;
     justify-content: center;
   }
 }
