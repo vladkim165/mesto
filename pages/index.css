@@ -30,7 +30,7 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__close-button/form__close-button.css);
-@import url(../blocks/form/__close-button/_size/form__close-button_size_s.css);
+@import url(../blocks/form/__close-button/_size/_s/form__close-button_size_s.css);
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__header/form__header.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
