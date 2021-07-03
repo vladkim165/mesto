@@ -8,4 +8,5 @@
   background: #000000;
   color: #FFFFFF;
   font-family: 'Inter', 'Arial', sans-serif;
+  min-height: 100vh;
 }

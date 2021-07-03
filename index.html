@@ -42,10 +42,10 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_add-form">
+    <div class="popup popup_open_add-form">
       <div class="popup__container">
         <form class="form" name="add-form">
-          <button class="form__close-button form__close-button_s" type="button" aria-label="Закрыть"></button>
+          <button class="form__close-button form__close-button_size_s" type="button" aria-label="Закрыть"></button>
           <h2 class="form__header">Новое место</h2>
           <input class="form__field form__field_input_place-name" type="text" name="place-name" placeholder="Название">
           <input class="form__field form__field_input_link" type="url" name="url" placeholder="Ссылка на картинку">
@@ -53,10 +53,18 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_open_background-image">
+      <div class="popup__background-image-container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="popup__image-title"></h2>
+        <img class="popup__background-image">
+      </div>
+    </div>
   </div>
   <template class="card-template">
     <li class="element">
       <img class="element__image">
+      <button class="element__delete-button" type="button"></button>
       <div class="element__info">
         <h2 class="element__title"></h2>
         <button class="element__like-button" type="button"></button>
