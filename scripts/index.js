@@ -153,8 +153,7 @@ addFormPopup.addEventListener('submit', addNewCard);
 //обьявим функции при клике на кнопки карточек
 
 function handleLikeCard(event) {
-  event.target.closest('.element').querySelector('.element__like-button').classList.toggle('element__like-button_active')
-  console.log('like');
+  event.target.closest('.element').querySelector('.element__like-button').classList.toggle('element__like-button_active');
 }
 
 
