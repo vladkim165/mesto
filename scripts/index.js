@@ -51,21 +51,18 @@ popupElement.addEventListener('submit', editProfileInfo);
 const cardTemplateContent = document.querySelector('.card-template').content;
 const cardList = document.querySelector('.elements__list');
 
-function createCard() {
+function createCard(name, link) {
   const cardData = cardTemplateContent.cloneNode(true);
   setEventListeners(cardData);
+  cardData.querySelector('.element__image').src = link;
+  cardData.querySelector('.element__title').alt = name;
+  cardData.querySelector('.element__title').textContent = name;
   return cardData
 }
 
 function renderCard(element) {
 
-  const cardElement = createCard();
-
-  createCard();
-
-  cardElement.querySelector('.element__image').src = element.link;
-  cardElement.querySelector('.element__image').alt = element.name;
-  cardElement.querySelector('.element__title').textContent = element.name;
+  const cardElement = createCard(element.name, element.link);
 
   cardList.prepend(cardElement);
 }
@@ -84,10 +81,13 @@ const closeAddFormButton = addFormPopup.querySelector('.form__close-button');
 const formPlaceNameElement = addFormPopup.querySelector('.form__field_input_place-name');
 const formLinkElement = addFormPopup.querySelector('.form__field_input_link');
 
+function resetFormInputs(popup) {
+  popup.querySelector('.form').reset();
+}
+
 addFormButton.addEventListener('click', function () {
   openPopup(addFormPopup);
-  formLinkElement.value = '';
-  formPlaceNameElement.value = '';
+  resetFormInputs(addFormPopup);
 });
 closeAddFormButton.addEventListener('click', function () {
   closePopup(addFormPopup);
@@ -99,18 +99,9 @@ addFormPopup.addEventListener('click', closePopupByClickOnOverlay);
 const addNewCard = function (event) {
   event.preventDefault();
 
-  const cardElement = createCard();
+  const elementData = { name: formPlaceNameElement.value, link: formLinkElement.value };
+  renderCard(elementData)
 
-  createCard();
-
-  cardElement.querySelector('.element__image').src = formLinkElement.value;
-  cardElement.querySelector('.element__image').alt = formPlaceNameElement.value;
-  cardElement.querySelector('.element__title').textContent = formPlaceNameElement.value;
-
-  cardList.prepend(cardElement);
-
-  formLinkElement.value = '';
-  formPlaceNameElement.value = '';
   closePopup(addFormPopup);
 }
 
@@ -130,7 +121,7 @@ function handleDeleteCard(event) {
 function setEventListeners(cardElement) {
   cardElement.querySelector('.element__like-button').addEventListener('click', handleLikeCard);
   cardElement.querySelector('.element__delete-button').addEventListener('click', handleDeleteCard);
-  cardElement.querySelector('.element__image').addEventListener('click', function () {
+  cardElement.querySelector('.element__image').addEventListener('click', function (event) {
     openImagePopup(event);
   })
 };
