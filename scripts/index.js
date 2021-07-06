@@ -6,8 +6,6 @@ const formBioElement = popupElement.querySelector('.form__field_input_bio');
 const userName = document.querySelector('.profile__title');
 const userInfo = document.querySelector('.profile__subtitle');
 
-
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
@@ -16,9 +14,9 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function closePopupByClickOnOverlay(event, popup) {
+function closePopupByClickOnOverlay(event) {
   if (event.target === event.currentTarget)
-    closePopup(popupElement);
+    closePopup(event.target);
 }
 // универсальные функции открытия и закрытия попапа
 
@@ -26,16 +24,9 @@ function closePopupByClickOnOverlay(event, popup) {
 function openProfilePopup() {
   formNameElement.value = userName.textContent;
   formBioElement.value = userInfo.textContent;
-
-
+  openPopup(popupElement);
 }
 
-function closeProfilePopup() {
-  formNameElement.value = userName.textContent;
-  formBioElement.value = userInfo.textContent;
-
-
-}
 // функции, открывающие и закрывающие попап профиля
 
 
@@ -49,13 +40,9 @@ function editProfileInfo(event) {
 }
 // функция, меняющая данные на странице после сабмита в попапе
 
-formOpenButtonElement.addEventListener('click', function () {
-  openPopup(popupElement);
-  openProfilePopup();
-});
+formOpenButtonElement.addEventListener('click', openProfilePopup);
 formCloseButtonElement.addEventListener('click', function () {
   closePopup(popupElement);
-  closeProfilePopup();
 });
 popupElement.addEventListener('click', closePopupByClickOnOverlay);
 popupElement.addEventListener('submit', editProfileInfo);
@@ -64,21 +51,23 @@ popupElement.addEventListener('submit', editProfileInfo);
 const cardTemplateContent = document.querySelector('.card-template').content;
 const cardList = document.querySelector('.elements__list');
 
-function addCard(element) {
-  setEventListeners(element);
-
-  cardList.prepend(element);
+function createCard() {
+  const cardData = cardTemplateContent.cloneNode(true);
+  setEventListeners(cardData);
+  return cardData
 }
 
 function renderCard(element) {
 
-  const cardElement = cardTemplateContent.cloneNode(true);
+  const cardElement = createCard();
+
+  createCard();
 
   cardElement.querySelector('.element__image').src = element.link;
   cardElement.querySelector('.element__image').alt = element.name;
   cardElement.querySelector('.element__title').textContent = element.name;
 
-  addCard(cardElement);
+  cardList.prepend(cardElement);
 }
 
 function renderCards(initialCards) {
@@ -94,34 +83,31 @@ const addFormPopup = document.querySelector('.popup_open_add-form');
 const closeAddFormButton = addFormPopup.querySelector('.form__close-button');
 const formPlaceNameElement = addFormPopup.querySelector('.form__field_input_place-name');
 const formLinkElement = addFormPopup.querySelector('.form__field_input_link');
-const cardName = document.querySelector('.element__title');
-const cardImage = document.querySelector('.element__image');
-
-function closeAddFormByClickOnOverlay(event) {
-  if (event.target === event.currentTarget)
-    closePopup(addFormPopup);
-}
 
 addFormButton.addEventListener('click', function () {
   openPopup(addFormPopup);
+  formLinkElement.value = '';
+  formPlaceNameElement.value = '';
 });
 closeAddFormButton.addEventListener('click', function () {
   closePopup(addFormPopup);
 });
-addFormPopup.addEventListener('click', closeAddFormByClickOnOverlay);
+addFormPopup.addEventListener('click', closePopupByClickOnOverlay);
 
 
 //функция добавления новой карточки в дом дерево
 const addNewCard = function (event) {
   event.preventDefault();
 
-  const cardElement = cardTemplateContent.cloneNode(true);
+  const cardElement = createCard();
+
+  createCard();
 
   cardElement.querySelector('.element__image').src = formLinkElement.value;
   cardElement.querySelector('.element__image').alt = formPlaceNameElement.value;
   cardElement.querySelector('.element__title').textContent = formPlaceNameElement.value;
 
-  addCard(cardElement);
+  cardList.prepend(cardElement);
 
   formLinkElement.value = '';
   formPlaceNameElement.value = '';
@@ -145,7 +131,6 @@ function setEventListeners(cardElement) {
   cardElement.querySelector('.element__like-button').addEventListener('click', handleLikeCard);
   cardElement.querySelector('.element__delete-button').addEventListener('click', handleDeleteCard);
   cardElement.querySelector('.element__image').addEventListener('click', function () {
-    openPopup(imagePopup);
     openImagePopup(event);
   })
 };
@@ -153,6 +138,8 @@ function setEventListeners(cardElement) {
 const imagePopup = document.querySelector('.popup_open_background-image');
 const popupBackgroundImage = document.querySelector('.popup__background-image');
 const popupTitle = document.querySelector('.popup__image-title');
+const cardName = document.querySelector('.element__title');
+const cardImage = document.querySelector('.element__image');
 
 function openImagePopup(event) {
   const cardImage = event.target.closest('.element').querySelector('.element__image');
@@ -160,16 +147,11 @@ function openImagePopup(event) {
   popupBackgroundImage.src = cardImage.src;
   popupBackgroundImage.alt = cardImage.alt;
   popupTitle.textContent = cardTitle.textContent;
-};
-
-const closeImagePopupByClickOnOverlay = function (event) {
-  if (event.target === event.currentTarget)
-    closePopup(imagePopup);
+  openPopup(imagePopup);
 };
 
 imagePopup.querySelector('.popup__close-button').addEventListener('click', function () {
   closePopup(imagePopup)
 });
-imagePopup.addEventListener('click', closeImagePopupByClickOnOverlay);
-
+imagePopup.addEventListener('click', closePopupByClickOnOverlay);
 
