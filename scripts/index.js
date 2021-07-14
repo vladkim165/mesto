@@ -1,8 +1,8 @@
 const formOpenButtonElement = document.querySelector('.profile__edit-button');
-const popupElement = document.querySelector('.popup');
-const formCloseButtonElement = popupElement.querySelector('.form__close-button');
-const formNameElement = popupElement.querySelector('.form__field_input_name');
-const formBioElement = popupElement.querySelector('.form__field_input_bio');
+const editProfilePopupElement = document.querySelector('.popup');
+const editProfileFormCloseButtonElement = editProfilePopupElement.querySelector('.form__close-button');
+const formNameElement = editProfilePopupElement.querySelector('.form__field_input_name');
+const formBioElement = editProfilePopupElement.querySelector('.form__field_input_bio');
 const userName = document.querySelector('.profile__title');
 const userInfo = document.querySelector('.profile__subtitle');
 const popupContainer = document.querySelector('.popup__container');
@@ -29,22 +29,42 @@ const closePopupByClickOnEsc = (evt) => {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByClickOnEsc);
+
+  const button = popup.querySelector('.form__save-button')
+  if (button) {
+    button.disabled = true;
+    button.classList.add('form__save-button_disabled');
+
+    hidePopUpError(popup);
+  }
+
+  const container = popup.querySelector('.popup__container')
+  if (container) container.classList.add('popup__container_opened');
+}
+
+function hidePopUpError(popup) {
+  const formFields = popup.querySelectorAll('.form__field');
+  const inputErrors = popup.querySelectorAll('.form__field-error');
+
+  inputErrors.forEach((inputError) => {
+    inputError.classList.remove('form__field-error_active');
+  });
+
+  formFields.forEach((formField) => {
+    formField.classList.remove('form__field_type_error');
+  });
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByClickOnEsc);
+
+
+  const container = popup.querySelector('.popup__container')
+  if (container) container.classList.remove('popup__container_opened');
 }
 
-function openPopupContainerSmoothly (popup) {
-  popup.querySelector('.popup__container').classList.add('popup__container_opened');
-}
-
-//функции для увеличения/уменьшения размеров контейнера при открытии/закрытии попапа
-
-function closePopupContainerSmoothly(popup) {
-  popup.querySelector('.popup__container').classList.remove('popup__container_opened');
-}
+// //функции для увеличения/уменьшения размеров контейнера при открытии/закрытии попапа
 
 
 function closePopupByClickOnOverlay(event) {
@@ -52,20 +72,14 @@ function closePopupByClickOnOverlay(event) {
     closePopup(event.target);
 }
 
-function closePopupContainerByClickOnOverlay (event) {
-  if (event.target === event.currentTarget)
-  closePopupContainerSmoothly(event.target);
-  closePopupByClickOnOverlay(event);
-}
-// универсальные функции открытия и закрытия попапа. Написал 2 функции(одна для попапа картинки)
+// универсальные функции открытия и закрытия попапа
 
 
 function openProfilePopup() {
-  // formNameElement.value = userName.textContent;
-  // formBioElement.value = userInfo.textContent;
+  formNameElement.value = userName.textContent;
+  formBioElement.value = userInfo.textContent;
   // popupContainer.style.background = generateColor();
-  openPopup(popupElement);
-  openPopupContainerSmoothly(popupElement);
+  openPopup(editProfilePopupElement);
 }
 
 // функции, открывающие и закрывающие попап профиля
@@ -77,20 +91,17 @@ function editProfileInfo(event) {
   userName.textContent = formNameElement.value;
   userInfo.textContent = formBioElement.value;
 
-  closePopupContainerSmoothly(popupElement);
-  closePopup(popupElement);
+  closePopup(editProfilePopupElement);
 }
 // функция, меняющая данные на странице после сабмита в попапе
 
 formOpenButtonElement.addEventListener('click', openProfilePopup);
-formCloseButtonElement.addEventListener('click', function () {
-  closePopup(popupElement);
-  closePopupContainerSmoothly(popupElement);
+editProfileFormCloseButtonElement.addEventListener('click', function () {
+  closePopup(editPopupElement);
 });
-popupElement.addEventListener('click', closePopupContainerByClickOnOverlay);
-popupElement.addEventListener('submit', function (event) {
+editProfilePopupElement.addEventListener('click', closePopupByClickOnOverlay);
+editProfilePopupElement.addEventListener('submit', function (event) {
   editProfileInfo(event);
-  closePopupContainerSmoothly(popupElement);
 });
 // добавлены слушатели событий на кнопки
 
@@ -127,20 +138,18 @@ const closeAddFormButton = addFormPopup.querySelector('.form__close-button');
 const formPlaceNameElement = addFormPopup.querySelector('.form__field_input_place-name');
 const formLinkElement = addFormPopup.querySelector('.form__field_input_link');
 
-// function resetFormInputs(popup) {
-//   popup.querySelector('.form').reset();
-// }
+function resetFormInputs(popup) {
+  popup.querySelector('.form').reset();
+}
 
 addFormButton.addEventListener('click', function () {
   openPopup(addFormPopup);
-  openPopupContainerSmoothly(addFormPopup);
-  // resetFormInputs(addFormPopup);
+  resetFormInputs(addFormPopup);
 });
 closeAddFormButton.addEventListener('click', function () {
   closePopup(addFormPopup);
-  closePopupContainerSmoothly(addFormPopup);
 });
-addFormPopup.addEventListener('click', closePopupContainerByClickOnOverlay);
+addFormPopup.addEventListener('click', closePopupByClickOnOverlay);
 
 
 //функция добавления новой карточки в дом дерево
@@ -155,8 +164,7 @@ const addNewCard = function (event) {
 
 addFormPopup.addEventListener('submit', function (event) {
   addNewCard(event);
-  closePopupContainerSmoothly(addFormPopup);
-  });
+});
 
 //обьявим функции при клике на кнопки карточек
 
@@ -196,4 +204,3 @@ imagePopup.querySelector('.popup__close-button').addEventListener('click', funct
   closePopup(imagePopup)
 });
 imagePopup.addEventListener('click', closePopupByClickOnOverlay);
-

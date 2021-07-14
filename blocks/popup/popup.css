@@ -10,4 +10,7 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s linear;
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
+  display:-webkit-box;
 }
