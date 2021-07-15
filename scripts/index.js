@@ -30,16 +30,16 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByClickOnEsc);
 
-  const button = popup.querySelector('.form__save-button')
-  if (button) {
-    button.disabled = true;
-    button.classList.add('form__save-button_disabled');
-
-    hidePopUpError(popup);
-  }
-
   const container = popup.querySelector('.popup__container')
   if (container) container.classList.add('popup__container_opened');
+}
+
+function turnOffButtonWhenOpenPopup(popup) {
+  const button = popup.querySelector(config.submitButtonSelector)
+  if (button) {
+    button.disabled = true;
+    button.classList.add(config.inactiveButtonClass);
+  }
 }
 
 function hidePopUpError(popup) {
@@ -79,6 +79,9 @@ function openProfilePopup() {
   formNameElement.value = userName.textContent;
   formBioElement.value = userInfo.textContent;
   // popupContainer.style.background = generateColor();
+
+  hidePopUpError(editProfilePopupElement);
+  turnOffButtonWhenOpenPopup(editProfilePopupElement);
   openPopup(editProfilePopupElement);
 }
 
@@ -97,7 +100,7 @@ function editProfileInfo(event) {
 
 formOpenButtonElement.addEventListener('click', openProfilePopup);
 editProfileFormCloseButtonElement.addEventListener('click', function () {
-  closePopup(editPopupElement);
+  closePopup(editProfilePopupElement);
 });
 editProfilePopupElement.addEventListener('click', closePopupByClickOnOverlay);
 editProfilePopupElement.addEventListener('submit', function (event) {
@@ -143,8 +146,11 @@ function resetFormInputs(popup) {
 }
 
 addFormButton.addEventListener('click', function () {
-  openPopup(addFormPopup);
   resetFormInputs(addFormPopup);
+  hidePopUpError(addFormPopup);
+  turnOffButtonWhenOpenPopup(addFormPopup);
+  openPopup(addFormPopup);
+
 });
 closeAddFormButton.addEventListener('click', function () {
   closePopup(addFormPopup);
