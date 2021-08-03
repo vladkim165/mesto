@@ -73,4 +73,5 @@ export default class Card {
   _closeImagePopup() {
     closePopup(imagePopup)
   }
+
 }

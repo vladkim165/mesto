@@ -51,15 +51,7 @@ export function openPopup(popup) {
 
   const container = popup.querySelector('.popup__container')
   if (container) container.classList.add('popup__container_opened');
-}
-
-function turnOffButtonWhenOpenPopup(popup) {
-  const button = popup.querySelector(config.submitButtonSelector)
-  if (button) {
-    button.disabled = true;
-    button.classList.add(config.inactiveButtonClass);
-  }
-}
+};
 
 function hidePopUpError(popup) {
   const formFields = popup.querySelectorAll(config.inputSelector);
@@ -100,7 +92,8 @@ function openProfilePopup() {
   // popupContainer.style.background = generateColor();
 
   hidePopUpError(editProfilePopupElement);
-  turnOffButtonWhenOpenPopup(editProfilePopupElement);
+  const validationTurnedOn = new FormValidation(config, editProfilePopupElement)
+  validationTurnedOn.turnOffSubmitButton()
   openPopup(editProfilePopupElement);
 }
 
@@ -143,7 +136,9 @@ function resetFormInputs(popup) {
 addFormButton.addEventListener('click', function () {
   resetFormInputs(addFormPopup);
   hidePopUpError(addFormPopup);
-  turnOffButtonWhenOpenPopup(addFormPopup);
+
+  const validationTurnedOn = new FormValidation(config, addFormPopup)
+  validationTurnedOn.turnOffSubmitButton()
   openPopup(addFormPopup);
 
 });

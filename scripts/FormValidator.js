@@ -95,6 +95,11 @@ class FormValidation {
     });
   }
 
+  turnOffSubmitButton() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true
+  }
+
   enableValidation() {
     this._setEventListenersToForm()
     this._formElement.addEventListener('submit', (evt) => {
