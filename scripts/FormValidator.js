@@ -1,4 +1,4 @@
-export {config, FormValidation}
+export {config, FormValidator}
 
 const config = {
   formSelector: '.form',
@@ -10,7 +10,7 @@ const config = {
   hiddenErrorClass: '.form__field-error'
 };
 
-class FormValidation {
+class FormValidator {
   _formElement
   _formSelector
   _inputSelector
@@ -75,8 +75,7 @@ class FormValidation {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.disabled = false;
     } else {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.disabled = true;
+      this.disableButton()
     }
   }
 
@@ -95,7 +94,14 @@ class FormValidation {
     });
   }
 
-  turnOffSubmitButton() {
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
+
+  disableButton() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true
   }

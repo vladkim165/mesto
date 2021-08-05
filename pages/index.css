@@ -31,8 +31,6 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__section/form__section.css);
-@import url(../blocks/form/__close-button/form__close-button.css);
-@import url(../blocks/form/__close-button/_size/_s/form__close-button_size_s.css);
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__field/_type/form__field_type_error.css);
 @import url(../blocks/form/__field-error/form__field-error.css);
