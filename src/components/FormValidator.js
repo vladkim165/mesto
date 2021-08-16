@@ -1,14 +1,4 @@
-export {config, FormValidator}
-
-const config = {
-  formSelector: '.form',
-  inputSelector: '.form__field',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_disabled',
-  inputErrorClass: 'form__field_type_error',
-  errorClass: 'form__field-error_active',
-  hiddenErrorClass: '.form__field-error'
-};
+export {FormValidator}
 
 class FormValidator {
   _formElement
@@ -70,7 +60,6 @@ class FormValidator {
 
   _toggleButtonState() {
     if (this._hasOnlyValidInput()) {
-      // this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
 
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.disabled = false;
@@ -80,9 +69,6 @@ class FormValidator {
   }
 
   _setEventListenersToForm() {
-    // this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    // this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {

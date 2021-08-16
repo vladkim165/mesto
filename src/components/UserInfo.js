@@ -7,10 +7,12 @@ export default class UserInfo {
     this._values = {}
     this._values.name = this.name.textContent
     this._values.info = this.info.textContent
+    
     return this._values
 
   }
   setUserInfo (userInfo) {
+
     this.name.textContent = userInfo.name
     this.info.textContent = userInfo.info
   }
