@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
 </head>
@@ -11,11 +10,11 @@
 <body>
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="images/logo.svg" alt="Логотип Место">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/Avatar.png" alt="Аватар профиля">
+        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватар профиля">
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <p class="profile__subtitle">Исследователь океана</p>
@@ -42,7 +41,7 @@
             <span class="form__field-error" id="name-input-error"></span>
           </section>
           <section class="form__section">
-            <input class="form__field form__field_input_bio" type="text" name="bio" id="bio-input" required
+            <input class="form__field form__field_input_bio" type="text" name="info" id="bio-input" required
               autocomplete="off" minlength="2" maxlength="200">
             <span class="form__field-error" id="bio-input-error"></span>
           </section>
@@ -56,12 +55,12 @@
           <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
           <h2 class="form__header">Новое место</h2>
           <section class="form__section">
-            <input class="form__field form__field_input_place-name" type="text" name="place-name" id="place-name-input"
+            <input class="form__field form__field_input_place-name" type="text" name="name" id="place-name-input"
               placeholder="Название" required autocomplete="off" minlength="2" maxlength="30">
             <span class="form__field-error" id="place-name-input-error"></span>
           </section>
           <section class="form__section">
-            <input class="form__field form__field_input_link" type="url" name="url" id="url-input"
+            <input class="form__field form__field_input_link" type="url" name="link" id="url-input"
               placeholder="Ссылка на картинку" required autocomplete="off">
             <span class="form__field-error" id="url-input-error"></span>
           </section>
@@ -91,10 +90,6 @@
       </li>
     </div>
   </template>
-  <script src="./scripts/initial-cards.js" type="module"></script>
-  <script src="./scripts/index.js" type="module"></script>
-  <script src="./scripts/FormValidator.js" type="module"></script>
-  <script src="./scripts/Card.js" type="module"></script>
 </body>
 
 </html>

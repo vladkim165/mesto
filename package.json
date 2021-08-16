@@ -1,0 +1,38 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Место - интерактивная страница, где вы можете менять имя и биографию, добавлять и удалять карточки, а также лайкать их. \r Проект написан на ООП\r ## Технологии проекта  \r Проект написан по методологии БЭМ, файловая структура имеет БЭМ архитектуру Nested; \r Используемые языки - html, css, javascript;\r Использовались глобальные стили: normalize.css; \r Страница адаптивная, версталась под несколько разрешений: 320px и 1280px. Также добавлялись брейкпонты, чтобы страница не развалилась на разных разрешениях;   \r Позиционировались элементы с помощью flex-боксов и гридов;  \r Добавлена логика на JS(открытие и закрытие формы, сабмит и изменение данных о человеке на странице).\r ## Инструкция по использованию проекта и системные требования  \r Необходимая версия языка: ru, т.к. страница написана на русском;    \r Использумые расширения: html, css, javascript;  \r Используемые шрифты: Inter, Arial, sans-serif;  \r ## Планы по доработке проекта  \r Добавить функционал: добавлять, удалять, а также лайкать фоторгафии.  \r ## Ссылка на проект  \r https://vladkim165.github.io/mesto/",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladkim165/mesto.git"
+  },
+  "author": "Vladislav Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vladkim165/mesto/issues"
+  },
+  "homepage": "https://github.com/vladkim165/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "autoprefixer": "^10.3.1",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.2.0",
+    "postcss-loader": "^6.1.1",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "core-js": "^2.5.7",
+    "cssnano": "^5.0.7"
+  }
+}
