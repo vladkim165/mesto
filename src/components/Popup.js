@@ -5,6 +5,7 @@ export default class Popup {
       this._handleEscClose(evt);
     };
     this._container = this._popup.querySelector('.popup__container')
+    this.submitButton = this._popup.querySelector('.form__save-button')
   };
 
   open() {
@@ -38,5 +39,17 @@ export default class Popup {
       if (evt.target === evt.currentTarget)
         this.close()
     });
+  }
+
+  loading(isLoading, loadingText, defaultText) {
+    if (isLoading) {
+      this.submitButton.textContent = loadingText
+      console.log('asd')
+      console.log(this.submitButton)
+      
+    }
+    if (!isLoading) {
+      this.submitButton.textContent = defaultText
+    }
   }
 }

@@ -2,6 +2,29 @@
   width: 120px;
   height: 120px;
   margin-right: 30px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.profile__avatar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: url(../../../images/pen-button.svg);
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile__avatar:hover::before {
+  opacity: 1
 }
 
 @media screen and (max-width: 950px) {
