@@ -24,7 +24,7 @@
 }
 
 .profile__avatar:hover::before {
-  opacity: 1
+  opacity: 1;
 }
 
 @media screen and (max-width: 950px) {
