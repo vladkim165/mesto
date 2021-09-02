@@ -1,30 +1,29 @@
 export default class Api {
-  constructor(authorizationToken) {
+  constructor(authorizationToken, url) {
     this.authorizationToken = authorizationToken;
+    this.url = url
   }
 
-  getCardItems(serverLink) {
-    return fetch(serverLink, {
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`)
+    }
+    return res.json()
+  }
+
+  getCardItems() {
+    return fetch(`${this.url}/cards`, {
       headers: {
         authorization: this.authorizationToken,
       }
     })
       .then((res) => {
-        if(res.ok){
-          return res.json()
-        }
-          return Promise.reject('Not ok - cardArray')
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.log(err)
+        return this._getResponseData(res)
       })
   }
 
-  setUserInfo(userInfo, serverLink) {
-    return fetch(serverLink, {
+  setUserInfo(userInfo) {
+    return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this.authorizationToken,
@@ -35,38 +34,24 @@ export default class Api {
         about: userInfo.info
       })
     })
-    .then((res) => {
-      if(res.ok){
-      return res.json()
-    }
-      return Promise.reject('Not ok - userInfoPatch')
-    })
-    .then((userData) => {
-      return userData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
-  getUserInfo(serverLink) {
-    return fetch(serverLink, {
+  getUserInfo() {
+    return fetch(`${this.url}/users/me`, {
       headers: {
         authorization: this.authorizationToken
       }
     })
       .then((res) => {
-        if(res.ok){
-        return res.json()
-      }
-        return Promise.reject('Not ok - userInfo')
+        return this._getResponseData(res)
       })
-      .then((userData) => {
-        return userData
-      })
-      .catch((err) => console.log(err))
   }
 
-  addNewCard(item, serverLink) {
-    return fetch(serverLink, {
+  addNewCard(item) {
+    return fetch(`${this.url}/cards`, {
       method: 'POST',
       headers: {
         authorization: this.authorizationToken,
@@ -77,80 +62,52 @@ export default class Api {
         link: item.link
       })
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      }
-        return Promise.reject('Not ok - addCard')
-    })
-    .then((cardData) => {
-      return cardData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
-  deleteCard(serverLink, id) {
-    return fetch(`${serverLink}/${id}`, {
+  deleteCard(id) {
+    return fetch(`${this.url}/cards/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: this.authorizationToken,
         'Content-Type': 'application/json'
       },
     })
-    .then((res) => {
-      if(res.ok){
-      return res.json()
-    }
-      return Promise.reject('Not ok - cardDeletion')
-    })
-    .then((userData) => {
-      return userData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
-  likeCard(serverLink, id) {
-    return fetch(`${serverLink}/likes/${id}`, {
+  likeCard(id) {
+    return fetch(`${this.url}/cards/likes/${id}`, {
       method: 'PUT',
       headers: {
         authorization: this.authorizationToken,
         'Content-Type': 'application/json'
       },
     })
-    .then((res) => {
-      if(res.ok){
-      return res.json()
-    }
-      return Promise.reject('Not ok - cardLike')
-    })
-    .then((userData) => {
-      return userData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
-  
-  unlikeCard(serverLink, id) {
-    return fetch(`${serverLink}/likes/${id}`, {
+
+  unlikeCard(id) {
+    return fetch(`${this.url}/cards/likes/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: this.authorizationToken,
         'Content-Type': 'application/json'
       },
     })
-    .then((res) => {
-      if(res.ok){
-      return res.json()
-    }
-      return Promise.reject('Not ok - cardUnlike')
-    })
-    .then((userData) => {
-      return userData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
-  changeAvatar(serverLink, avatarLink) {
-    return fetch(serverLink, {
+  changeAvatar(avatarLink) {
+    return fetch(`${this.url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this.authorizationToken,
@@ -160,15 +117,8 @@ export default class Api {
         avatar: avatarLink
       })
     })
-    .then((res) => {
-      if(res.ok){
-        return res.json()
-      }
-        return Promise.reject('Not ok - changeAvatar')
-    })
-    .then((cardData) => {
-      return cardData
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 }

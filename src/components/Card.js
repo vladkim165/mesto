@@ -23,9 +23,11 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate()
 
-    this._element.querySelector('.element__image').alt = this._name;
+    const image = this._element.querySelector('.element__image')
+
+    image.alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').src = this._link;
+    image.src = this._link;
 
     this._setEventListeners();
 
@@ -58,10 +60,11 @@ export default class Card {
 
   deleteCard() {
     this._element.remove();
+    this._element = null;
   }
 
   setLikes(cardInfo) {
     const likeCounter = this._element.querySelector('.element__like-counter')
     likeCounter.textContent = cardInfo.likes.length
-  } 
+  }
 }

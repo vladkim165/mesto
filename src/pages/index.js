@@ -1,20 +1,19 @@
 import { formOpenButtonElement, formNameElement, formBioElement, addFormButton, profilePicture } from '../utils/constants.js'
 import './index.css'
-import { imagePopup, addForm, ProfileFormValidation, createCardFormValidation, profile, editProfilePopup, deletionConfirmationPopup, api, cardElementsList, changeAvatarFormValidation, changeAvatarForm } from '../utils/utils'
+import { imagePopup, addForm, profileFormValidation, createCardFormValidation, profile, editProfilePopup, deletionConfirmationPopup, api, cardElementsList, changeAvatarFormValidation, changeAvatarForm } from '../utils/utils'
 
-api.getCardItems('https://mesto.nomoreparties.co/v1/cohort-27/cards')
-.then((cardArray) => {
-  cardElementsList.renderItems(cardArray)
-})
+Promise.all([api.getUserInfo(), api.getCardItems()])
+  .then((data) => {
+    profile.setUserInfo(data[0])
+    cardElementsList.renderItems(data[1],  data[0])
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 imagePopup.setEventListeners()
 
 deletionConfirmationPopup.setEventListeners()
-
-api.getUserInfo('https://nomoreparties.co/v1/cohort-27/users/me')
-.then((data) => {
-  profile.setUserInfo(data)
-})
 
 addForm.setEventListeners()
 
@@ -27,10 +26,12 @@ editProfilePopup.setEventListeners()
 
 formOpenButtonElement.addEventListener('click', () => {
   editProfilePopup.open();
-  ProfileFormValidation.resetValidation();
+  profileFormValidation.resetValidation();
 
-  formNameElement.value = profile.getUserInfo().name;
-  formBioElement.value = profile.getUserInfo().info;
+  const profileData = profile.getUserInfo()
+
+  formNameElement.value = profileData.name;
+  formBioElement.value = profileData.info;
 
 })
 
@@ -42,7 +43,7 @@ profilePicture.addEventListener('click', () => {
 
 changeAvatarForm.setEventListeners()
 
-ProfileFormValidation.enableValidation();
+profileFormValidation.enableValidation();
 
 createCardFormValidation.enableValidation();
 

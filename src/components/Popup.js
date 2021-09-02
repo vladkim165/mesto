@@ -20,7 +20,7 @@ export default class Popup {
     document.removeEventListener('keydown', this._closeByEsc)
     this._popup.classList.remove('popup_opened');
 
-    
+
     if (this._container) this._container.classList.remove('popup__container_opened');
   }
 
@@ -44,9 +44,7 @@ export default class Popup {
   loading(isLoading, loadingText, defaultText) {
     if (isLoading) {
       this.submitButton.textContent = loadingText
-      console.log('asd')
-      console.log(this.submitButton)
-      
+
     }
     if (!isLoading) {
       this.submitButton.textContent = defaultText

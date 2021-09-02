@@ -1,4 +1,4 @@
-export {FormValidator}
+export { FormValidator }
 
 class FormValidator {
   _formElement
@@ -72,7 +72,7 @@ class FormValidator {
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', () => {
+      inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
 
         this._toggleButtonState();

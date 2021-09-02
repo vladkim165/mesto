@@ -4,11 +4,11 @@ export default class Section {
     this._renderer = renderer
   }
 
-  renderItems(cardArray) {
-    cardArray.forEach(item => this._renderer(item))
+  renderItems(cardArray, userInfo) {
+    cardArray.forEach(item => this._renderer(item, userInfo))
   }
 
   addItem(element) {
-    this._container.append(element)
+    this._container.prepend(element)
   }
 }
