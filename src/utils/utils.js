@@ -11,6 +11,8 @@ import Api from '../components/Api.js'
 
 export { imagePopup, cardElementsList, addForm, profileFormValidation, createCardFormValidation, profile, editProfilePopup, api, deletionConfirmationPopup, changeAvatarFormValidation, changeAvatarForm }
 
+// инстанс класса попапа с формой - форма смены аватара
+
 const changeAvatarForm = new PopupWithForm({
   handleFormSubmit: (userAvatar) => {
     changeAvatarForm.loading(true, 'Сохранение...', 'Сохранить')
@@ -34,6 +36,9 @@ const imagePopup = new PopupWithImage('.popup_open_background-image')
 const deletionConfirmationPopup = new PopupWithConfirmation('.popup_delete-confirmation')
 
 const api = new Api('a5607433-7f53-40eb-a48e-ab0174e03e0a', 'https://mesto.nomoreparties.co/v1/cohort-27')
+
+
+// инстанс для создания каждой карточки
 
 const createCard = (item) => {
   const card = new Card(item, '.card-template', () => imagePopup.open(item), () => {
@@ -69,6 +74,8 @@ const createCard = (item) => {
   return card.generateCard()
 }
 
+// Отрисовываем массив карточек с сервера
+
 const cardElementsList = new Section({
   renderer: (cardItem, userInfo) => {
     const cardElement = createCard(cardItem, userInfo)
@@ -94,6 +101,8 @@ const cardElementsList = new Section({
 },
   cardList
 );
+
+// инстанс для попапа добавления новой карточки
 
 const addForm = new PopupWithForm({
   handleFormSubmit: (cardItem) => {
@@ -121,6 +130,8 @@ const changeAvatarFormValidation = new FormValidator(config, changeProfileForm)
 
 const profile = new UserInfo({ nameSelector: '.profile__title', infoSelector: '.profile__subtitle', profilePicture: '.profile__avatar-img' })
 
+// попап смены информации о профиле
+
 const editProfilePopup = new PopupWithForm({
   handleFormSubmit: (userInfo) => {
     editProfilePopup.loading(true, 'Сохранение...', 'Сохранить')
@@ -137,22 +148,3 @@ const editProfilePopup = new PopupWithForm({
 },
   '.popup_profile'
 );
-
-
-
-// const getItems = function() {
-//   fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
-//     headers: {
-//       authorization: 'a5607433-7f53-40eb-a48e-ab0174e03e0a'
-//     }
-//   })
-//     .then(res => res.json())
-//     .then((result) => {
-//       cardElementsList.renderItems(result);
-//     })
-//     .catch(() => {
-//       console.log('Ошибка с массивом карточек')
-//     })
-// }
-
-// getItems()
