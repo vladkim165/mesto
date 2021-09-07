@@ -1,7 +1,4 @@
 .header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
   width: 100%;
   max-width: 880px;
   margin: 0 auto;

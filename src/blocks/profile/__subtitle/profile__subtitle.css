@@ -25,3 +25,12 @@
     max-width: 282px;
   }
 }
+
+@media screen and (max-width: 350px) {
+  .profile__subtitle {
+    font-size: 12px;
+    line-height: 14px;
+    margin-left: 5px;
+    max-width: 189px;
+  }
+}
