@@ -1,0 +1,162 @@
+.sign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient( ellipse 15% 35% at 50% 50%, gray, transparent);
+  transform: translate(-50%, -50%);
+  letter-spacing: 2;
+  color: white;
+  text-shadow: 0 0 0.6rem white, 0 0 1.5rem white, -0.2rem 0.1rem 1rem white, 0.2rem 0.1rem 1rem white, 0 -0.5rem 2rem white, 0 0.5rem 3rem white;
+  animation: shine 2s forwards, flicker 3s infinite;
+  margin: 70px 0 20px 70px;
+  padding: 0;
+  font-size: 40px;
+}
+
+@keyframes blink {
+  0%, 22%, 36%, 75% {
+    color: white;
+    text-shadow: 0 0 0.6rem white, 0 0 1.5rem white, -0.2rem 0.1rem 1rem white, 0.2rem 0.1rem 1rem white, 0 -0.5rem 2rem white, 0 0.5rem 3rem white;
+  }
+  28%, 33% {
+    color: white;
+    text-shadow: none;
+  }
+  82%, 97% {
+    color: white;
+    text-shadow: none;
+  }
+}
+
+.flicker {
+  animation: shine 2s forwards, blink 3s 2s infinite;
+}
+
+.fast-flicker {
+  animation: shine 2s forwards, blink 10s 1s infinite;
+}
+
+@keyframes shine {
+  0% {
+    color: white;
+    text-shadow: none;
+  }
+  100% {
+    color: white;
+    text-shadow: 0 0 0.6rem white, 0 0 1.5rem white, -0.2rem 0.1rem 1rem white, 0.2rem 0.1rem 1rem white, 0 -0.5rem 2rem white, 0 0.5rem 3rem white;
+  }
+}
+
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.9;
+  }
+  6% {
+    opacity: 0.85;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  11% {
+    opacity: 0.922;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  14% {
+    opacity: 0.95;
+  }
+  16% {
+    opacity: 0.98;
+  }
+  17% {
+    opacity: 0.9;
+  }
+  19% {
+    opacity: 0.93;
+  }
+  20% {
+    opacity: 0.99;
+  }
+  24% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 0.94;
+  }
+  28% {
+    opacity: 0.98;
+  }
+  37% {
+    opacity: 0.93;
+  }
+  38% {
+    opacity: 0.5;
+  }
+  39% {
+    opacity: 0.96;
+  }
+  42% {
+    opacity: 1;
+  }
+  44% {
+    opacity: 0.97;
+  }
+  46% {
+    opacity: 0.94;
+  }
+  56% {
+    opacity: 0.9;
+  }
+  58% {
+    opacity: 0.9;
+  }
+  60% {
+    opacity: 0.99;
+  }
+  68% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  72% {
+    opacity: 0.95;
+  }
+  93% {
+    opacity: 0.93;
+  }
+  95% {
+    opacity: 0.95;
+  }
+  97% {
+    opacity: 0.93;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .sign {
+    margin-left: 100px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .sign {
+    margin-left: 110px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sign {
+    margin-left: 70px
+  }
+}

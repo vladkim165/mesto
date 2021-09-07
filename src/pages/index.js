@@ -6,7 +6,6 @@ Promise.all([api.getUserInfo(), api.getCardItems()])
   .then((data) => {
     profile.setUserInfo(data[0])
     cardElementsList.renderItems(data[1],  data[0])
-    console.log(data[1])
   })
   .catch((err) => {
     console.log(err);
